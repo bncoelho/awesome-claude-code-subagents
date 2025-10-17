@@ -4,20 +4,48 @@ Utility scripts for managing Claude models across all OpenCode agents.
 
 ## Quick Start
 
-Update all agents to the latest Claude models:
+**Update all agents to the latest Claude models:**
 
 ```bash
 ruby scripts/update-agents-models.rb
 ```
+
+**Preview changes before applying (dry-run mode):**
+
+```bash
+ruby scripts/update-agents-models.rb --dry-run
+```
+
+**Check if your models are up-to-date with Anthropic's latest:**
+
+```bash
+ruby scripts/update-agents-models.rb --check-latest
+```
+
+**Combine flags to check and preview:**
+
+```bash
+ruby scripts/update-agents-models.rb --dry-run --check-latest
+```
+
+## Features
+
+- ✅ **Centralized Configuration**: Single YAML file controls all agent models
+- ✅ **Dry-Run Mode**: Preview changes before applying them
+- ✅ **Latest Model Checking**: Automatically checks Anthropic docs for newest versions
+- ✅ **Safe Updates**: Only modifies YAML frontmatter, validates model IDs
+- ✅ **Error Handling**: Graceful failures with clear error messages
+- ✅ **Idempotent**: Safe to run multiple times, only updates when needed
 
 ## What It Does
 
 The model updater synchronizes all 8+ agents with the latest Claude models by:
 
 1. **Reading Configuration**: Loads semantic model mappings from `.opencode/model-config.yaml`
-2. **Updating Agent Files**: Updates each agent's model in `.opencode/agent/*.md` and `.opencode/agent/subagents/*.md`
-3. **Syncing Configuration**: Updates `opencode.json` with the latest model IDs and temperatures
-4. **Providing Feedback**: Shows a summary of all changes
+2. **Checking Latest (Optional)**: Fetches latest model info from Anthropic docs
+3. **Updating Agent Files**: Updates each agent's model in `.opencode/agent/*.md` and `.opencode/agent/subagents/*.md`
+4. **Syncing Configuration**: Updates `opencode.json` with the latest model IDs and temperatures
+5. **Providing Feedback**: Shows a summary of all changes
 
 ## Configuration
 
@@ -181,7 +209,25 @@ All 100+ agents updated in seconds. ✨
 ### Dependencies
 
 - Ruby 2.6+ (built-in YAML and JSON libraries)
+- `curl` (optional, recommended for better HTTP redirect handling)
+- `timeout` command (optional, for curl timeouts)
 - No external gems required
+
+### Testing
+
+Run the test suite to verify core functionality:
+
+```bash
+ruby scripts/test_update_agents_models.rb
+```
+
+The test suite covers:
+- Model ID validation (accepts valid Anthropic models, rejects others)
+- YAML frontmatter parsing and updates
+- Model version extraction from HTML
+- Configuration loading with safe YAML parsing
+- Dry-run behavior (ensures no file modifications)
+- Error handling for missing files and invalid JSON
 
 ## Troubleshooting
 
@@ -201,11 +247,19 @@ All 100+ agents updated in seconds. ✨
 ## Example Commands
 
 ```bash
+# Check if models are up-to-date
+ruby scripts/update-agents-models.rb --check-latest
+
+# Preview what would change (dry-run)
+ruby scripts/update-agents-models.rb --dry-run
+
 # Update all agents to latest models
 ruby scripts/update-agents-models.rb
 
-# See what would change (dry-run via git diff)
-ruby scripts/update-agents-models.rb
+# Check and preview together
+ruby scripts/update-agents-models.rb --dry-run --check-latest
+
+# View changes after update
 git diff --stat
 
 # Rollback if needed
@@ -214,15 +268,28 @@ git checkout .opencode/ opencode.json
 # Commit the changes
 git add .opencode/ opencode.json
 git commit -m "Update agents to latest Claude models"
+
+# Get help
+ruby scripts/update-agents-models.rb --help
 ```
+
+## Command Line Options
+
+| Option | Description |
+|--------|-------------|
+| `--dry-run` | Preview changes without modifying any files |
+| `--check-latest` | Check Anthropic docs for latest model versions |
+| `--help`, `-h` | Show help message with usage examples |
 
 ## Best Practices
 
-1. **Use Aliases**: Always use `claude-sonnet-4-5` not `claude-sonnet-4-5-20250929`
-2. **Update Regularly**: Run when new Claude versions release (typically monthly)
-3. **Version Control**: Always commit changes with descriptive messages
-4. **Document Changes**: Update model-config.yaml comments with release notes
-5. **Test First**: Verify agents work before committing to main
+1. **Check First**: Use `--check-latest` to see if updates are available
+2. **Preview Changes**: Always use `--dry-run` before applying updates
+3. **Use Aliases**: Always use `claude-sonnet-4-5` not `claude-sonnet-4-5-20250929`
+4. **Update Regularly**: Run when new Claude versions release (typically monthly)
+5. **Version Control**: Always commit changes with descriptive messages
+6. **Document Changes**: Update model-config.yaml comments with release notes
+7. **Test First**: Verify agents work before committing to main
 
 ## Next Steps
 

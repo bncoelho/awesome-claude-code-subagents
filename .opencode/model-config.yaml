@@ -1,7 +1,7 @@
 ---
 # Model Configuration for OpenCode Agents
 # This file maps model families to agent functionalities
-# Run: python3 scripts/update-agents-models.py to sync all agents
+# Run: ruby scripts/update-agents-models.rb to sync all agents
 
 # Latest Claude Models (from https://docs.claude.com/en/docs/about-claude/models/overview)
 # These use aliases which automatically update to latest versions
