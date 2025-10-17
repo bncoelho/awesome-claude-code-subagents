@@ -13,6 +13,9 @@ tools:
 permissions:
   bash:
     "*": "deny"
+    "git commit": "deny"
+    "git push": "deny"
+    "git add": "deny"
   write:
     "**/*.env*": "deny"
     "**/*.secret": "deny"

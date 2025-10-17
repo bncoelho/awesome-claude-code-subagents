@@ -17,6 +17,12 @@ permissions:
     "git status": "allow"
     "git log*": "allow"
     "git show*": "allow"
+    "git commit": "deny"
+    "git push": "deny"
+    "git add": "deny"
+    "git reset": "deny"
+    "git rebase": "deny"
+    "git merge": "deny"
     "*": "deny"
   write:
     "**/*": "deny"

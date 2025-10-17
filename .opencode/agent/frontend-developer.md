@@ -13,8 +13,14 @@ tools:
 permissions:
   bash:
     "rm -rf *": "deny"
-    "git push --force": "ask"
-    "npm publish": "ask"
+    "git commit": "deny"
+    "git push": "deny"
+    "git add": "deny"
+    "git reset": "deny"
+    "git rebase": "deny"
+    "git merge": "deny"
+    "npm publish": "deny"
+    "docker system prune": "deny"
   edit:
     "**/*.env*": "deny"
     "**/*.secret": "deny"
