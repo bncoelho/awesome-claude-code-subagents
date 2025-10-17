@@ -1,7 +1,7 @@
 ---
 description: "Comprehensive UI/UX and accessibility review with WCAG 2.1 AA compliance validation"
 mode: subagent
-model: claude-sonnet
+model: anthropic/claude-sonnet-4
 temperature: 0.2
 tools:
   read: true

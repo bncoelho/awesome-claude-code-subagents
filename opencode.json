@@ -1,39 +1,39 @@
 {
   "$schema": "https://opencode.ai/config.json",
 
-  "model": "claude-sonnet",
+  "model": "anthropic/claude-sonnet-4",
 
   "agent": {
     "fullstack-developer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.2
     },
     "backend-developer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.2
     },
     "frontend-developer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.2
     },
     "api-designer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.1
     },
     "pragmatic-code-reviewer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.1
     },
     "code-reviewer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.1
     },
     "security-scanner": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.1
     },
     "design-reviewer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.2
     }
   }

@@ -1,7 +1,7 @@
 ---
 description: "Modern frontend development with accessibility and responsive design"
 mode: primary
-model: claude-sonnet
+model: anthropic/claude-sonnet-4
 temperature: 0.2
 tools:
   read: true

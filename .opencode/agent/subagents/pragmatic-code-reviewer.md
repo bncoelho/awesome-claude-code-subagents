@@ -1,7 +1,7 @@
 ---
 description: "Pragmatic code review balancing quality with velocity using hierarchical triage"
 mode: subagent
-model: claude-sonnet
+model: anthropic/claude-sonnet-4
 temperature: 0.1
 tools:
   read: true

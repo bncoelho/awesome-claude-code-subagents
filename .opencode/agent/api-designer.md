@@ -1,7 +1,7 @@
 ---
 description: "REST and GraphQL API architecture, design, and documentation"
 mode: primary
-model: claude-sonnet
+model: anthropic/claude-sonnet-4
 temperature: 0.1
 tools:
   read: true

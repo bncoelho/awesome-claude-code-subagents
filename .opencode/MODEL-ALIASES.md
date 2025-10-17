@@ -2,13 +2,13 @@
 
 ## Overview
 
-The OpenCode agent system uses **generic model names** to manage Claude model versions centrally. Instead of hardcoding specific model versions in agent files or `opencode.json`, agents reference generic names like `claude-sonnet` that automatically resolve to the latest available version. This ensures:
+The OpenCode agent system uses **provider-qualified model names** for reliable model resolution. All agents reference models using the `{provider}/{model-id}` format (e.g., `anthropic/claude-sonnet-4`). This ensures:
 
-- ✅ Always using the latest models (when using generic names like `claude-sonnet`)
-- ✅ Centralized control (update once, affects all agents using that alias)
-- ✅ Semantic clarity (agent intent is clear from alias name)
+- ✅ Reliable model resolution (OpenCode CLI can find the model)
+- ✅ Centralized control (update once in `opencode.json`, all agents use it)
+- ✅ Multi-provider support (can use anthropic, openai, etc.)
 - ✅ Environment flexibility (different configs for prod/staging/dev)
-- ✅ Cost optimization (easily switch to cheaper models for specific tasks)
+- ✅ Cost optimization (easily switch to different models)
 
 ---
 
@@ -16,31 +16,33 @@ The OpenCode agent system uses **generic model names** to manage Claude model ve
 
 ### Implemented in `opencode.json`
 
-All pilot agents use generic model names that automatically resolve to the latest available versions:
+All pilot agents use the Anthropic provider with Claude Sonnet 4 model:
 
 ```json
 {
-  "model": "claude-sonnet",
+  "model": "anthropic/claude-sonnet-4",
   "agent": {
     "fullstack-developer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.2
     },
     "pragmatic-code-reviewer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.1
     },
     "security-scanner": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.1
     },
     "design-reviewer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4",
       "temperature": 0.2
     }
   }
 }
 ```
+
+**Format**: `{provider}/{model-id}` - this ensures OpenCode can properly resolve the model.
 
 ### Model Usage by Agent Type
 
@@ -57,47 +59,51 @@ All pilot agents use generic model names that automatically resolve to the lates
 
 ## How It Works
 
-### 1. Agent Files Use Direct Model Names
+### 1. Agent Files Reference Provider-Qualified Models
 
 ```yaml
 # .opencode/agent/fullstack-developer.md
 ---
 description: "End-to-end feature implementation across frontend, backend, and database"
 mode: primary
-model: claude-sonnet    # ← Direct model name (generic, always latest)
+model: anthropic/claude-sonnet-4    # ← Provider/model format
 temperature: 0.2
 ---
 ```
 
-All 8 pilot agents use `model: claude-sonnet` which automatically resolves to the latest available Claude Sonnet version.
+All 8 pilot agents use `model: anthropic/claude-sonnet-4` which OpenCode CLI can properly resolve.
 
-### 2. OpenCode Resolves to Latest Version
+### 2. OpenCode Resolves the Model
 
 When the agent runs, OpenCode:
-1. Reads the agent's `model: claude-sonnet`
-2. Resolves to the latest available Claude Sonnet version
-3. If new versions release, they're automatically used
-4. No manual updates needed to agent files
+1. Reads the agent's `model: anthropic/claude-sonnet-4`
+2. Resolves to the Anthropic provider's Claude Sonnet 4 model
+3. Invokes the model with the specified temperature and parameters
+4. Returns results to the agent
 
-### 3. Update Centrally When Needed
+### 3. Update Centrally in `opencode.json`
 
-If you want to pin specific versions or use different models:
+To change models for all agents or specific ones:
 
-**Option A: Update in `opencode.json` (affects all agents using that model)**
+**Update default model for all agents:**
 ```json
 {
-  "agent": {
-    "fullstack-developer": {
-      "model": "claude-opus"  // Override to use Opus
-    }
-  }
+  "model": "anthropic/claude-opus-4",
+  "agent": { }
 }
 ```
 
-**Option B: Pin to specific version (if API supports it)**
-```yaml
-# In agent file
-model: claude-sonnet-4-20250514
+**Override specific agent:**
+```json
+{
+  "model": "anthropic/claude-sonnet-4",
+  "agent": {
+    "architect-reviewer": {
+      "model": "anthropic/claude-opus-4",
+      "temperature": 0.1
+    }
+  }
+}
 ```
 
 ---
