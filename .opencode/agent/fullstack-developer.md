@@ -1,7 +1,7 @@
 ---
 description: "End-to-end feature implementation across frontend, backend, and database"
 mode: primary
-model: development
+model: claude-sonnet
 temperature: 0.2
 tools:
   read: true

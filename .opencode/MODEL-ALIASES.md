@@ -1,8 +1,8 @@
-# Model Alias System - Complete Guide
+# Model Management Strategy - Complete Guide
 
 ## Overview
 
-The OpenCode agent system uses **semantic model aliases** to manage Claude model versions centrally. Instead of hardcoding specific model versions in agent files, agents reference semantic aliases defined in `opencode.json`. This ensures:
+The OpenCode agent system uses **generic model names** to manage Claude model versions centrally. Instead of hardcoding specific model versions in agent files or `opencode.json`, agents reference generic names like `claude-sonnet` that automatically resolve to the latest available version. This ensures:
 
 - ✅ Always using the latest models (when using generic names like `claude-sonnet`)
 - ✅ Centralized control (update once, affects all agents using that alias)
@@ -57,17 +57,19 @@ All pilot agents use generic model names that automatically resolve to the lates
 
 ## How It Works
 
-### 1. Agent Files Reference Direct Models
+### 1. Agent Files Use Direct Model Names
 
 ```yaml
 # .opencode/agent/fullstack-developer.md
 ---
-description: "Full-stack development"
+description: "End-to-end feature implementation across frontend, backend, and database"
 mode: primary
 model: claude-sonnet    # ← Direct model name (generic, always latest)
 temperature: 0.2
 ---
 ```
+
+All 8 pilot agents use `model: claude-sonnet` which automatically resolves to the latest available Claude Sonnet version.
 
 ### 2. OpenCode Resolves to Latest Version
 

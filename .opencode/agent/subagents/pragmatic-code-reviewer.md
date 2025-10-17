@@ -1,7 +1,7 @@
 ---
-description: "Pragmatic code review balancing engineering excellence with development velocity"
+description: "Pragmatic code review balancing quality with velocity using hierarchical triage"
 mode: subagent
-model: review
+model: claude-sonnet
 temperature: 0.1
 tools:
   read: true

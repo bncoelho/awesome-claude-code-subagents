@@ -1,7 +1,7 @@
 ---
 description: "OWASP-based security vulnerability scanning with intelligent false-positive filtering"
 mode: subagent
-model: security
+model: claude-sonnet
 temperature: 0.1
 tools:
   read: true

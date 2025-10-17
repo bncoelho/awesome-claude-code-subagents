@@ -1,7 +1,7 @@
 ---
-description: "API architecture design for REST and GraphQL with focus on developer experience"
-mode: subagent
-model: review
+description: "REST and GraphQL API architecture, design, and documentation"
+mode: primary
+model: claude-sonnet
 temperature: 0.1
 tools:
   read: true

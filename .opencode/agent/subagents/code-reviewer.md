@@ -1,7 +1,7 @@
 ---
 description: "Expert code review for quality, security, and best practices across multiple languages"
 mode: subagent
-model: review
+model: claude-sonnet
 temperature: 0.1
 tools:
   read: true

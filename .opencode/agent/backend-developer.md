@@ -1,7 +1,7 @@
 ---
-description: "Scalable backend API development with focus on performance and security"
+description: "Scalable backend development with performance and security focus"
 mode: primary
-model: development
+model: claude-sonnet
 temperature: 0.2
 tools:
   read: true

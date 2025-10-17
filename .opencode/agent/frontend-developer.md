@@ -1,7 +1,7 @@
 ---
-description: "Modern frontend development with React/Vue/Angular focus on performance and accessibility"
+description: "Modern frontend development with accessibility and responsive design"
 mode: primary
-model: development
+model: claude-sonnet
 temperature: 0.2
 tools:
   read: true
