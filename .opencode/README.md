@@ -4,47 +4,75 @@ Production-ready OpenCode agent configurations from the Awesome Claude Code Suba
 
 ## 📊 Overview
 
-**Pilot Status**: ✅ Complete (8/119 agents)
+**Pilot Status**: ✅ Complete (11/119 agents)
 
 This directory contains OpenCode-compatible agent configurations, context files, and slash commands for a comprehensive AI-native development workflow.
 
 ### Quick Stats
-- **Total Agents**: 8 (pilot)
-- **Agent Types**: 5 primary, 3 subagent
-- **Context Files**: 6 focused knowledge bases
-- **Slash Commands**: 3 workflow shortcuts
-- **Total Lines**: ~1,900+ production documentation
+- **Total Agents**: 11 (pilot)
+- **Agent Types**: 3 primary, 8 subagent
+- **Context Files**: 8 focused knowledge bases
+- **Slash Commands**: 6 workflow shortcuts
+- **Total Lines**: ~5,500+ production documentation
 
 ---
 
-## 🎯 Model Alias System
+## 🎯 Model Management System
 
-All agents use **semantic model aliases** for centralized model management. Instead of hardcoding specific versions, agents use generic model names like `claude-sonnet` that automatically resolve to the latest available version:
+All agents use **Anthropic's semantic model aliases** for automatic updates and centralized management:
 
 ```json
 {
-  "model": "claude-sonnet",
+  "model": "anthropic/claude-sonnet-4-5",
   "agent": {
     "fullstack-developer": {
-      "model": "claude-sonnet",
+      "model": "anthropic/claude-sonnet-4-5",
       "temperature": 0.2
     },
     "pragmatic-code-reviewer": {
-      "model": "claude-sonnet",
-      "temperature": 0.1
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
     }
   }
 }
 ```
 
-**Benefits:**
-- ✅ Always use latest models (generic names auto-update)
-- ✅ Centralized control (update once, all agents benefit)
-- ✅ Simple & clean (no version chasing)
-- ✅ Cost optimization (easily adjust per environment)
-- ✅ Easy scaling (classification guide provided)
+**Model Aliases** (Auto-updating):
+- `anthropic/claude-sonnet-4-5` → Latest Sonnet (best balance)
+- `anthropic/claude-opus-4-1` → Latest Opus (complex reasoning)
+- `anthropic/claude-haiku-4-5` → Latest Haiku (fast tasks)
 
-See **[MODEL-ALIASES.md](./MODEL-ALIASES.md)** for detailed documentation.
+**Benefits:**
+- ✅ Always use latest models (aliases auto-resolve to newest versions)
+- ✅ Centralized control (single config file manages all 8+ agents)
+- ✅ No version chasing (aliases update automatically)
+- ✅ Automated management (Ruby script for bulk updates)
+- ✅ Safety features (dry-run, validation, error handling)
+
+### Model Update Automation
+
+We provide a production-grade Ruby script for managing model versions:
+
+```bash
+# Check if models are up-to-date
+ruby scripts/update-agents-models.rb --check-latest
+
+# Preview changes before applying
+ruby scripts/update-agents-models.rb --dry-run
+
+# Update all agents to latest models
+ruby scripts/update-agents-models.rb
+```
+
+**Features:**
+- ✅ Dry-run mode to preview changes
+- ✅ Automatic latest model checking from Anthropic docs
+- ✅ Safe YAML parsing with validation
+- ✅ Comprehensive error handling
+- ✅ Full test suite (18 tests, 100% passing)
+- ✅ Security hardened (shell escaping, timeouts)
+
+See **[scripts/README.md](../scripts/README.md)** for detailed documentation.
 
 ---
 
@@ -69,6 +97,9 @@ These agents are invoked by other agents or via @ mentions for specialized tasks
 | **design-reviewer** | UI/UX review with WCAG accessibility validation | Subagent |
 | **code-reviewer** | Broad code quality and security review across languages | Subagent |
 | **api-designer** | REST and GraphQL API architecture and documentation | Subagent |
+| **api-documenter** | OpenAPI/Swagger specs with interactive portals and examples | Subagent |
+| **technical-writer** | Clear, accessible documentation for diverse audiences | Subagent |
+| **documentation-engineer** | Documentation systems with automation and testing | Subagent |
 
 ---
 
@@ -85,6 +116,15 @@ Quick shortcuts for common workflows:
 
 # Design and UX review
 /design-review "Review the new user profile page for accessibility and responsiveness"
+
+# Generate OpenAPI/Swagger API documentation
+/api-docs "Create OpenAPI spec for the REST API endpoints"
+
+# Set up documentation infrastructure
+/doc-setup "Initialize documentation system with Docusaurus"
+
+# Create technical documentation
+/document "Write user guide for the authentication flow"
 ```
 
 ---
@@ -106,6 +146,10 @@ Shared knowledge base automatically injected into agents:
 
 ### Accessibility
 - **wcag-checklist.md** - WCAG 2.1 AA compliance checklist and validation steps
+
+### Documentation
+- **api-documentation-standards.md** - OpenAPI/Swagger best practices, interactive portals, code generation
+- **documentation-infrastructure.md** - Documentation systems, build pipelines, testing, multi-version support
 
 ---
 
@@ -131,6 +175,9 @@ opencode --agent backend-developer
 /review "my-branch"
 /security-scan "auth-system"
 /design-review "components/Button.tsx"
+/api-docs "src/api/routes"
+/doc-setup "docs/"
+/document "authentication-guide"
 ```
 
 ### 4. Mention Subagents
@@ -171,6 +218,33 @@ Your UI → /design-review → design-reviewer
                          → WCAG testing
                          → responsive validation
                          → structured findings
+```
+
+### API Documentation Workflow
+```
+Your API → /api-docs → api-documenter
+                     → OpenAPI/Swagger spec generation
+                     → endpoint documentation
+                     → example requests/responses
+                     → interactive portal setup
+```
+
+### Documentation Setup Workflow
+```
+Your Project → /doc-setup → documentation-engineer
+                          → infrastructure selection
+                          → build pipeline setup
+                          → CI/CD integration
+                          → testing framework
+```
+
+### Technical Writing Workflow
+```
+Your Feature → /document → technical-writer
+                         → audience analysis
+                         → content structure
+                         → clear explanations
+                         → code examples
 ```
 
 ---
@@ -246,6 +320,12 @@ permissions:
 1. **awesome-claude-code-subagents** - 5 agents converted (fullstack, backend, frontend, api-designer, code-reviewer)
 2. **claude-code-workflows** - 3 new agents created (pragmatic-code-reviewer, security-scanner, design-reviewer)
 
+**Model Management**:
+- Migrated from generic aliases (`claude-sonnet`) to Anthropic semantic aliases (`anthropic/claude-sonnet-4-5`)
+- Implemented automated model management system with Ruby script
+- Added comprehensive test suite for validation logic
+- Security hardened with safe YAML parsing, shell escaping, and timeout protection
+
 **Full Plan**: See `.opencode/PILOT-SUMMARY.md` for detailed pilot information
 
 ---
@@ -257,6 +337,56 @@ permissions:
 3. **Scale Conversion**: Apply patterns to remaining 111+ agents
 4. **Automation**: Build conversion scripts for batch processing
 5. **Integration**: GitHub Actions workflows for automated reviews
+
+---
+
+## 🛠️ Management Tools
+
+### Model Update Script
+
+**Location**: `scripts/update-agents-models.rb`
+
+A production-grade Ruby script for managing Claude model versions across all agents:
+
+**Key Features:**
+- **Safe Operations**: Dry-run mode, YAML validation, comprehensive error handling
+- **Latest Model Checking**: Fetches current models from Anthropic documentation
+- **Security Hardened**: Safe YAML parsing, shell escaping, timeout protection
+- **Well Tested**: 18 tests covering validation, parsing, and edge cases
+- **Zero Dependencies**: Uses only Ruby stdlib (no gems required)
+
+**Common Commands:**
+```bash
+# Check if updates are available
+ruby scripts/update-agents-models.rb --check-latest
+
+# Preview changes (safe, no modifications)
+ruby scripts/update-agents-models.rb --dry-run
+
+# Apply updates
+ruby scripts/update-agents-models.rb
+
+# Get help
+ruby scripts/update-agents-models.rb --help
+
+# Run test suite
+ruby scripts/test_update_agents_models.rb
+```
+
+**Configuration:**
+- Central config: `.opencode/model-config.yaml`
+- Maps model families (sonnet/opus/haiku) to agents
+- Single source of truth for all model assignments
+
+**Test Coverage:**
+- ✅ Model ID validation
+- ✅ YAML frontmatter parsing
+- ✅ Model version extraction
+- ✅ Configuration loading
+- ✅ Dry-run behavior
+- ✅ Error handling
+
+See **[scripts/README.md](../scripts/README.md)** for complete documentation.
 
 ---
 
@@ -273,11 +403,17 @@ permissions:
 │       ├── security-scanner.md (NEW)
 │       ├── design-reviewer.md (NEW)
 │       ├── code-reviewer.md
-│       └── api-designer.md
+│       ├── api-designer.md
+│       ├── api-documenter.md (NEW)
+│       ├── technical-writer.md (NEW)
+│       └── documentation-engineer.md (NEW)
 ├── command/
 │   ├── review.md (NEW)
 │   ├── security-scan.md (NEW)
-│   └── design-review.md (NEW)
+│   ├── design-review.md (NEW)
+│   ├── api-docs.md (NEW)
+│   ├── doc-setup.md (NEW)
+│   └── document.md (NEW)
 ├── context/
 │   ├── core/essential-patterns.md (NEW)
 │   ├── quality/
@@ -286,7 +422,10 @@ permissions:
 │   ├── security/
 │   │   ├── owasp-vulnerability-patterns.md (NEW)
 │   │   └── false-positive-filters.md (NEW)
-│   └── accessibility/wcag-checklist.md (NEW)
+│   ├── accessibility/wcag-checklist.md (NEW)
+│   └── documentation/
+│       ├── api-documentation-standards.md (NEW)
+│       └── documentation-infrastructure.md (NEW)
 └── README.md (this file)
 ```
 
@@ -294,13 +433,18 @@ permissions:
 
 ## 🎯 Success Metrics (Pilot)
 
-- ✅ 8 agents successfully converted/created
-- ✅ 6 focused context files created (~300 lines each)
-- ✅ 3 slash commands for common workflows
+- ✅ 11 agents successfully converted/created
+- ✅ 8 focused context files created (~300-640 lines each)
+- ✅ 6 slash commands for common workflows
 - ✅ All agents properly configured with permissions
 - ✅ Pragmatic quality framework successfully integrated
 - ✅ Security scanning with false-positive filtering implemented
 - ✅ Design review with accessibility focus completed
+- ✅ Documentation agents (API, technical writing, systems engineering)
+- ✅ Documentation workflows (API docs, infrastructure setup, technical writing)
+- ✅ Model management system with automated updates
+- ✅ Comprehensive test suite (18 tests, 32 assertions)
+- ✅ Production-grade error handling and security hardening
 
 ---
 

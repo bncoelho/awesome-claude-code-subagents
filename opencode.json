@@ -33,6 +33,18 @@
     "design-reviewer": {
       "model": "anthropic/claude-sonnet-4-5",
       "temperature": 0.2
+    },
+    "api-documenter": {
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
+    },
+    "technical-writer": {
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
+    },
+    "documentation-engineer": {
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
     }
   }
 }

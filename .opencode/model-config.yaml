@@ -46,6 +46,11 @@ agents:
   security-scanner: sonnet
   design-reviewer: sonnet
   
+  # Documentation
+  api-documenter: sonnet
+  technical-writer: sonnet
+  documentation-engineer: sonnet
+  
   # Future Agents (when scaling)
   # architect-reviewer: opus          # Complex architecture analysis
   # workflow-orchestrator: opus       # Multi-agent coordination
