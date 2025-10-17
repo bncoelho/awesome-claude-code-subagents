@@ -1,7 +1,7 @@
 ---
 description: "Scalable backend development with performance and security focus"
 mode: primary
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
 temperature: 0.2
 tools:
   read: true

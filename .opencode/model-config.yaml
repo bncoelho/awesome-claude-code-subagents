@@ -1,0 +1,69 @@
+---
+# Model Configuration for OpenCode Agents
+# This file maps model families to agent functionalities
+# Run: python3 scripts/update-agents-models.py to sync all agents
+
+# Latest Claude Models (from https://docs.claude.com/en/docs/about-claude/models/overview)
+# These use aliases which automatically update to latest versions
+models:
+  # Primary: Claude Sonnet 4.5 - Best balance, excellent for coding and agents
+  sonnet:
+    id: "anthropic/claude-sonnet-4-5"
+    description: "Claude Sonnet 4.5 - Best balance of intelligence, speed, cost"
+    use_cases: "Development, general tasks, coding"
+    temperature: 0.2
+    
+  # Specialized: Claude Opus 4.1 - For complex reasoning tasks
+  opus:
+    id: "anthropic/claude-opus-4-1"
+    description: "Claude Opus 4.1 - Exceptional model for specialized reasoning"
+    use_cases: "Complex reasoning, architecture decisions, deep analysis"
+    temperature: 0.1
+    
+  # Fast: Claude Haiku 4.5 - Fastest model with near-frontier intelligence
+  haiku:
+    id: "anthropic/claude-haiku-4-5"
+    description: "Claude Haiku 4.5 - Fastest model with near-frontier intelligence"
+    use_cases: "Simple tasks, quick responses, cost optimization"
+    temperature: 0.1
+
+# Agent to Model Family Mapping
+# Format: agent_name: model_family
+agents:
+  # Primary Development Agents
+  fullstack-developer: sonnet
+  backend-developer: sonnet
+  frontend-developer: sonnet
+  
+  # API & Architecture
+  api-designer: sonnet
+  
+  # Code Review & Quality
+  pragmatic-code-reviewer: sonnet
+  code-reviewer: sonnet
+  
+  # Security & Design
+  security-scanner: sonnet
+  design-reviewer: sonnet
+  
+  # Future Agents (when scaling)
+  # architect-reviewer: opus          # Complex architecture analysis
+  # workflow-orchestrator: opus       # Multi-agent coordination
+  # legacy-modernizer: opus           # Complex refactoring
+  # database-optimizer: opus          # Query optimization
+  # performance-engineer: opus        # Performance analysis
+  # research-analyst: opus            # Deep research synthesis
+  # 
+  # simple-formatter: haiku           # Fast formatting
+  # quick-checks: haiku               # Quick syntax checks
+
+# Temperature Overrides (optional)
+# temperature_overrides:
+#   security-scanner: 0.05            # Stricter for security
+
+# Notes
+# - Always use aliases (claude-sonnet-4-5) not specific dates (claude-sonnet-4-5-20250929)
+# - Aliases auto-update when new versions release
+# - See https://docs.claude.com/en/docs/about-claude/models/overview for latest models
+# - Last updated: October 2025
+# - Next review: When new Claude models are released

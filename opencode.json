@@ -1,39 +1,37 @@
 {
   "$schema": "https://opencode.ai/config.json",
-
-  "model": "anthropic/claude-3-5-sonnet-20241022",
-
+  "model": "anthropic/claude-sonnet-4-5",
   "agent": {
     "fullstack-developer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "model": "anthropic/claude-sonnet-4-5",
       "temperature": 0.2
     },
     "backend-developer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "model": "anthropic/claude-sonnet-4-5",
       "temperature": 0.2
     },
     "frontend-developer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "model": "anthropic/claude-sonnet-4-5",
       "temperature": 0.2
     },
     "api-designer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
-      "temperature": 0.1
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
     },
     "pragmatic-code-reviewer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
-      "temperature": 0.1
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
     },
     "code-reviewer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
-      "temperature": 0.1
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
     },
     "security-scanner": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
-      "temperature": 0.1
+      "model": "anthropic/claude-sonnet-4-5",
+      "temperature": 0.2
     },
     "design-reviewer": {
-      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "model": "anthropic/claude-sonnet-4-5",
       "temperature": 0.2
     }
   }

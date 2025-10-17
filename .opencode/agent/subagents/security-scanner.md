@@ -1,8 +1,8 @@
 ---
 description: "OWASP-based security vulnerability scanning with intelligent false-positive filtering"
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
-temperature: 0.1
+model: anthropic/claude-sonnet-4-5
+temperature: 0.2
 tools:
   read: true
   grep: true
