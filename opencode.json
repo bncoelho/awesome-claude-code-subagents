@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "claude-sonnet",
+
+  "agent": {
+    "fullstack-developer": {
+      "model": "claude-sonnet",
+      "temperature": 0.2
+    },
+    "backend-developer": {
+      "model": "claude-sonnet",
+      "temperature": 0.2
+    },
+    "frontend-developer": {
+      "model": "claude-sonnet",
+      "temperature": 0.2
+    },
+    "api-designer": {
+      "model": "claude-sonnet",
+      "temperature": 0.1
+    },
+    "pragmatic-code-reviewer": {
+      "model": "claude-sonnet",
+      "temperature": 0.1
+    },
+    "code-reviewer": {
+      "model": "claude-sonnet",
+      "temperature": 0.1
+    },
+    "security-scanner": {
+      "model": "claude-sonnet",
+      "temperature": 0.1
+    },
+    "design-reviewer": {
+      "model": "claude-sonnet",
+      "temperature": 0.2
+    }
+  }
+}
